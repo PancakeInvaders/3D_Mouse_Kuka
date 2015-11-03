@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Desktop/Kuka3DMouse/trunk/Kuka3DMouse/.idea/Kuka3DMouse.iml" filepath="$USER_HOME$/Desktop/Kuka3DMouse/trunk/Kuka3DMouse/.idea/Kuka3DMouse.iml" />
-      <module fileurl="file://$USER_HOME$/Desktop/NouveauTaxi/trunk/ServiceWeb/.idea/ServiceWeb.iml" filepath="$USER_HOME$/Desktop/NouveauTaxi/trunk/ServiceWeb/.idea/ServiceWeb.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../..//$PROJECT_DIR$/.idea/Kuka3DMouse.iml" filepath="$PROJECT_DIR$/.idea/Kuka3DMouse.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../..//$USER_HOME$/Desktop/Kuka3DMouse/trunk/Kuka3DMouse/.idea/Kuka3DMouse.iml" filepath="$USER_HOME$/Desktop/Kuka3DMouse/trunk/Kuka3DMouse/.idea/Kuka3DMouse.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../..//$USER_HOME$/Desktop/NouveauTaxi/trunk/ServiceWeb/.idea/ServiceWeb.iml" filepath="$USER_HOME$/Desktop/NouveauTaxi/trunk/ServiceWeb/.idea/ServiceWeb.iml" />
     </modules>
   </component>
 </project>
