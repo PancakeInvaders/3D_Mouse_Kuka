@@ -49,6 +49,10 @@ namespace darkproject
 
             */
 
+            // init robot
+            var a = new NLX.Robot.Kuka.Controller.RobotController();
+            a.Connect("192.168.1.1");
+
             float _X = 50;
             float _Y = 0;
             float _Z = 0;
@@ -61,9 +65,7 @@ namespace darkproject
 
         static void traiterDeplacements(double _X, double _Y, double _Z, double _A, double _B, double _C)
         { 
-            // init robot
-            var a = new NLX.Robot.Kuka.Controller.RobotController();
-            a.Connect("192.168.1.1");
+
 
             // get pos from souris
             var pos = new NLX.Robot.Kuka.Controller.CartesianPosition();
