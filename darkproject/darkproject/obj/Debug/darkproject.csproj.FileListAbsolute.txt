@@ -1,0 +1,6 @@
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\bin\Debug\darkproject.exe.config
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\obj\Debug\darkproject.csprojResolveAssemblyReference.cache
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\bin\Debug\darkproject.exe
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\bin\Debug\darkproject.pdb
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\obj\Debug\darkproject.exe
+c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\obj\Debug\darkproject.pdb
