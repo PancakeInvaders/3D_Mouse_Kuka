@@ -4,14 +4,8 @@ c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\b
 c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\bin\Debug\darkproject.pdb
 c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\obj\Debug\darkproject.exe
 c:\users\skwiner\documents\visual studio 2015\Projects\darkproject\darkproject\obj\Debug\darkproject.pdb
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\darkproject.exe.config
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\obj\Debug\darkproject.exe
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\obj\Debug\darkproject.pdb
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\darkproject.exe
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\darkproject.pdb
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\nlx.robot.kuka.controller.dll
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\NLX.Maurel.exe
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\Wop_Contracts.dll
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\Stateless.dll
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\bin\Debug\Stateless.xml
-C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\darkproject\obj\Debug\darkproject.csprojResolveAssemblyReference.cache
+C:\Users\skwiner\Documents\Visual Studio 2015\Projects\darkproject\darkproject\bin\Debug\nlx.robot.kuka.controller.dll
+C:\Users\skwiner\Documents\Visual Studio 2015\Projects\darkproject\darkproject\bin\Debug\NLX.Maurel.exe
+C:\Users\skwiner\Documents\Visual Studio 2015\Projects\darkproject\darkproject\bin\Debug\Wop_Contracts.dll
+C:\Users\skwiner\Documents\Visual Studio 2015\Projects\darkproject\darkproject\bin\Debug\Stateless.dll
+C:\Users\skwiner\Documents\Visual Studio 2015\Projects\darkproject\darkproject\bin\Debug\Stateless.xml

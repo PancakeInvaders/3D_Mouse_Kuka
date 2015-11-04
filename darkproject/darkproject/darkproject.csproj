@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nlx.robot.kuka.controller">
-      <HintPath>..\..\DLL\bin\nlx.robot.kuka.controller.dll</HintPath>
+      <HintPath>D:\3A\PROJET KUKA 2\bin\nlx.robot.kuka.controller.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
