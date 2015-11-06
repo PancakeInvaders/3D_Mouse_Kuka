@@ -13,6 +13,17 @@ namespace darkproject
 {
     class Program
     {
+
+        static ScenarioHandler sh;
+
+        static bool modeCapture = false;
+
+        static bool modeDefaut = true;
+
+        static string scenarioDefaut = @"C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\scenario.sck";
+        static string scenarioGenere = @"C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\scenario2.sck";
+
+
         static public event KeyEventHandler KeyUp;
 
         static NLX.Robot.Kuka.Controller.RobotController theRobot;
@@ -45,6 +56,9 @@ namespace darkproject
             Console.WriteLine(device.Sensor.Translation);
             //System.Threading.Thread.Sleep(2500);
 
+            //translation = device.Sensor.Translation;
+            //rotation = device.Sensor.Rotation;
+
             Console.WriteLine(device.IsConnected);
             device.Connect();
             Console.WriteLine(device.IsConnected);
@@ -67,74 +81,19 @@ namespace darkproject
 
 
 
-            ScenarioHandler sh = new ScenarioHandler();
-            sh.readAndInterpretFile(@"C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\scenario.sck", theRobot);
+            sh = new ScenarioHandler();
+            //sh.readAndInterpretFile(@"C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\scenario.sck", theRobot);
 
             Console.WriteLine("File interpretation finished");
 
 
-            Console.WriteLine("On entre dans le while");
+            Console.WriteLine("On entre dans le while sleep");
             while (true)
             {
-
-                //if (Control.ModifierKeys == Keys.Shift)
-                //{
-                //    Console.WriteLine("*******KEYPRESSED***********");
-                //}
-
-                var translation = device.Sensor.Translation;
-                var rotation = device.Sensor.Rotation;
-
-                //Console.WriteLine("Translation : " + translation.X + ";" + translation.Y + ";" + translation.Z);
-                //Console.WriteLine("Rotation : " + rotation.X + ";" + rotation.Y + ";" + rotation.Z);
-
-                /*if (translation.X > xMax)
-                    xMax = translation.X; Console.WriteLine("xMax= " + xMax);
-                if (translation.Y > yMax)
-                    yMax = translation.Y; Console.WriteLine("yMax= " + yMax);
-                if (translation.Z > zMax)
-                    zMax = translation.Z; Console.WriteLine("zMax= " + zMax);*/
-
-                String valeurMax = getPriorityMouvement(translation.X/2900, translation.Y/2900, translation.Z/2900, rotation.X, rotation.Y, rotation.Z);
-
-                switch (valeurMax)
-                {
-                    case "x":
-                        Console.WriteLine("Avancer sur x");
-                        traiterDeplacements(0.0, (-1)*coeffTrans * translation.X / 2900, 0.0, 0.0, 0.0, 0.0);
-                        Console.WriteLine("Fin Avancer sur x");
-                        break;
-                    case "y":
-                        Console.WriteLine("Avancer sur y");
-                        traiterDeplacements(0.0, 0.0, coeffTrans * translation.Y / 2900, 0.0, 0.0, 0.0);
-                        Console.WriteLine("Fin Avancer sur y");
-                        break;
-                    case "z":
-                        Console.WriteLine("Avancer sur z");
-                        traiterDeplacements((-1) * coeffTrans * translation.Z / 2900, 0.0, 0.0, 0.0, 0.0, 0.0);
-                        Console.WriteLine("Fin Avancer sur z");
-                        break;
-                    case "a":
-                        traiterDeplacements(0.0, 0.0, 0.0, coeffRot*rotation.X*10, 0.0, 0.0);
-                        Console.WriteLine("Rotation sur a");
-                        break;
-                    case "b":
-                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Y*10, 0.0);
-                        Console.WriteLine("Rotation sur b");
-                        break;
-                    case "c":
-                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Z*10);
-                        Console.WriteLine("Rotation sur c");
-                        break;
-                    default:
-                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-                        break;
-                }
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(100);
             }
 
-            Console.WriteLine("End programm, press a key to exit.....");
-            Console.ReadKey();
+
         }
 
         //Fonction de trie , renvoie l'ordre dominante et applique un filtre sur les valeurs.
@@ -311,6 +270,18 @@ namespace darkproject
                     Console.WriteLine("a: " + currentPos.A);
                     Console.WriteLine("b: " + currentPos.B);
                     Console.WriteLine("c: " + currentPos.C);
+                    if (modeCapture == true)
+                    {
+                        //a finir , convertir double en string mais attention ! virgule ou point?!
+                        sh.addInstruction(currentPos.X.ToString());
+                        sh.addInstruction(currentPos.Y.ToString());
+                        sh.addInstruction(currentPos.Z.ToString());
+                        sh.addInstruction(currentPos.A.ToString());
+                        sh.addInstruction(currentPos.B.ToString());
+                        sh.addInstruction(currentPos.C.ToString());
+                        sh.addInstruction("");
+                    }
+                    
 
 
                 }
@@ -371,20 +342,124 @@ namespace darkproject
                 { // demander une nouvelle vitesse
 
                     theRobot.OpenGripper();
-
                     Console.WriteLine("open grip");
+
+                    if (modeCapture == true)
+                    {
+                        sh.addInstruction("open");
+                        sh.addInstruction("");
+                    }
 
                 }
                 else if ((keyinfo.KeyChar == 'o') || (keyinfo.KeyChar == 'O')) // close grip
                 { // demander une nouvelle vitesse
 
                     theRobot.CloseGripper();
-
                     Console.WriteLine("close grip");
 
+                    if (modeCapture == true)
+                    {
+                        sh.addInstruction("close");
+                        sh.addInstruction("");
+                    }
+
+                }
+                else if ((keyinfo.KeyChar == 'p') || (keyinfo.KeyChar == 'P')) // changer mode
+                {
+                    modeDefaut = !modeDefaut;
+                    Console.WriteLine(modeDefaut);
+                }
+                else if ((keyinfo.KeyChar == 'q') || (keyinfo.KeyChar == 'Q')) // lancer scenario
+                {
+                    if (modeDefaut == true)
+                    {
+
+                        Console.WriteLine("in Q default");
+
+                        ScenarioHandler sh = new ScenarioHandler();
+                        sh.readAndInterpretFile(scenarioDefaut, theRobot);
+                    }
+                    else
+                    {
+
+                        Console.WriteLine("in Q genered");
+
+
+                        ScenarioHandler sh = new ScenarioHandler();
+                        sh.readAndInterpretFile(scenarioGenere, theRobot);
+                    }
+
+                }
+                else if ((keyinfo.KeyChar == 's') || (keyinfo.KeyChar == 'S')) // changer Capture / terminer capture
+                {
+                    if (modeCapture==false)
+                    {
+
+                        modeCapture = true;
+                        sh.openFile(scenarioGenere);
+                        Console.WriteLine("Lancement capture");
+                        Thread myThreadCapture;
+                        myThreadCapture = new Thread(new ThreadStart(lancerModeCapture));
+                        myThreadCapture.Start();
+                    }
+                    else
+                    {
+                        //terminer capture
+                        Console.WriteLine("testArretcapture");
+                        modeCapture = false;
+                        sh.closeFile(scenarioGenere);
+                        Console.WriteLine("Arretcapture");
+                    }
                 }
             }
             while (Thread.CurrentThread.IsAlive);
+        }
+
+        public static void lancerModeCapture()
+        {
+            while (modeCapture == true)
+            {
+                var translation = device.Sensor.Translation;
+                var rotation = device.Sensor.Rotation;
+
+
+                String valeurMax = getPriorityMouvement(translation.X / 2900, translation.Y / 2900, translation.Z / 2900, rotation.X, rotation.Y, rotation.Z);
+
+                switch (valeurMax)
+                {
+                    case "x":
+                        Console.WriteLine("Avancer sur x");
+                        traiterDeplacements(0.0, (-1) * coeffTrans * translation.X / 2900, 0.0, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur x");
+                        break;
+                    case "y":
+                        Console.WriteLine("Avancer sur y");
+                        traiterDeplacements(0.0, 0.0, coeffTrans * translation.Y / 2900, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur y");
+                        break;
+                    case "z":
+                        Console.WriteLine("Avancer sur z");
+                        traiterDeplacements((-1) * coeffTrans * translation.Z / 2900, 0.0, 0.0, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur z");
+                        break;
+                    case "a":
+                        traiterDeplacements(0.0, 0.0, 0.0, coeffRot * rotation.X * 10, 0.0, 0.0);
+                        Console.WriteLine("Rotation sur a");
+                        break;
+                    case "b":
+                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Y * 10, 0.0);
+                        Console.WriteLine("Rotation sur b");
+                        break;
+                    case "c":
+                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Z * 10);
+                        Console.WriteLine("Rotation sur c");
+                        break;
+                    default:
+                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+                        break;
+                }
+                System.Threading.Thread.Sleep(50);
+            }
         }
 
     }   

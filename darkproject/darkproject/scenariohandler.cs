@@ -10,11 +10,18 @@ namespace darkproject
 {
     class ScenarioHandler
     {
+        private StreamWriter fs;
+        System.Collections.Generic.List<NLX.Robot.Kuka.Controller.CartesianPosition> listPos;
+
+
         public void readAndInterpretFile(string path, NLX.Robot.Kuka.Controller.RobotController robot)
         {
 
             Console.WriteLine("in readAndInterpretFile");
             Console.WriteLine("path: " + path);
+
+            listPos = new List<NLX.Robot.Kuka.Controller.CartesianPosition>();
+
 
             try
             {
@@ -24,7 +31,6 @@ namespace darkproject
                     {
 
                         double d;
-                        System.Collections.Generic.List < NLX.Robot.Kuka.Controller.CartesianPosition > listPos =
                             new List<NLX.Robot.Kuka.Controller.CartesianPosition>();
 
                         while (sr.Peek() >= 0)
@@ -68,22 +74,21 @@ namespace darkproject
                                 str = sr.ReadLine();
                                 Console.WriteLine(str);
 
+                                listPos.Add( robot.GetCurrentPosition() );
+
                                 // add cpos to the listPos
                                 listPos.Add(cpos);
+
+                                fctPlay(robot);
 
                             }
                             else
                             {
                                 // play the list of positions if it's not empty
+                                Console.WriteLine("rob: " + robot);
+                                Console.WriteLine("listpos: " + listPos);
 
-                                if( listPos.Count() != 0)
-                                {
-                                    // play the list, then empty it
-                                    robot.PlayTrajectory(listPos);
-
-                                    listPos.Clear();
-
-                                }
+                                fctPlay(robot);
 
                                 if (str == "open")
                                 {
@@ -106,14 +111,7 @@ namespace darkproject
 
                         }
 
-                        if (listPos.Count() != 0)
-                        {
-                            // play the list, then empty it
-                            robot.PlayTrajectory(listPos);
-
-                            listPos.Clear();
-
-                        }
+                        fctPlay(robot);
                     }
 
                 }
@@ -129,6 +127,39 @@ namespace darkproject
 
         }
 
+        public void addInstruction(string instructions)
+        {
+            //using (StreamWriter outfile = new StreamWriter())
+            //{
+            //outfile.Write(instructions);
+            //fs.Write(instructions);
+            fs.WriteLine(instructions);
+            //}
+        }
 
+        public void openFile(string path)
+        {
+            //fs = File.Open(path, FileMode.Open, FileAccess.Write, FileShare.None);
+            fs = new StreamWriter(path);
+        }
+
+        public void closeFile(string path)
+        {
+            fs.Close();
+        }
+
+        public void fctPlay(NLX.Robot.Kuka.Controller.RobotController rob)
+        {
+
+            if (listPos.Count() != 0)
+            {
+                // play the list, then empty it
+                rob.PlayTrajectory(listPos);
+
+                listPos.Clear();
+
+            }
+
+        }
     }
 }
