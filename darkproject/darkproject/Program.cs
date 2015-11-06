@@ -4,21 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows;
+using System.Windows.Forms;
+
+
 
 namespace darkproject
 {
     class Program
     {
+        static public event KeyEventHandler KeyUp;
 
-        static NLX.Robot.Kuka.Controller.RobotController a;
+        static NLX.Robot.Kuka.Controller.RobotController theRobot;
 
         static TDx.TDxInput.Device device;
 
+        static bool started;
+        static double coeffTrans;
+        static double coeffRot;
+
         static void Main(string[] args)
         {
+            started = false;
+
             Program prog = new Program();
 
             Console.WriteLine("Start of programm....");
+            coeffTrans = 1.0;
+            coeffRot = 1.0;
+
+            Thread myThreadKeyboard;
+            myThreadKeyboard = new Thread(new ThreadStart(KeyboardThreadLoop));
+            myThreadKeyboard.Start();
+
 
             device = new TDx.TDxInput.Device();
             //keyboard = new TDx.TDxInput.Keyboard();
@@ -43,13 +61,27 @@ namespace darkproject
 
             //double xMax = 0, yMax = 0, zMax = 0;
 
-            a = new NLX.Robot.Kuka.Controller.RobotController();
-            a.Connect("192.168.1.1");
+            theRobot = new NLX.Robot.Kuka.Controller.RobotController();
+            theRobot.Connect("192.168.1.1");
             Console.WriteLine("Connection avec le robot OK !");
 
+
+
+            ScenarioHandler sh = new ScenarioHandler();
+            sh.readAndInterpretFile(@"C:\Users\IMERIR14\Desktop\Novalinxproject\trunk\darkproject\scenario.sck", theRobot);
+
+            Console.WriteLine("File interpretation finished");
+
+
+            Console.WriteLine("On entre dans le while");
             while (true)
             {
-                
+
+                //if (Control.ModifierKeys == Keys.Shift)
+                //{
+                //    Console.WriteLine("*******KEYPRESSED***********");
+                //}
+
                 var translation = device.Sensor.Translation;
                 var rotation = device.Sensor.Rotation;
 
@@ -64,35 +96,37 @@ namespace darkproject
                     zMax = translation.Z; Console.WriteLine("zMax= " + zMax);*/
 
                 String valeurMax = getPriorityMouvement(translation.X/2900, translation.Y/2900, translation.Z/2900, rotation.X, rotation.Y, rotation.Z);
-                Console.WriteLine("before switch");
+
                 switch (valeurMax)
                 {
                     case "x":
-                        traiterDeplacements(10.0, 0.0, 0.0, 0.0, 0.0, 0.0);
                         Console.WriteLine("Avancer sur x");
+                        traiterDeplacements(0.0, (-1)*coeffTrans * translation.X / 2900, 0.0, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur x");
                         break;
                     case "y":
-                        traiterDeplacements(0.0, 10.0, 0.0, 0.0, 0.0, 0.0);
                         Console.WriteLine("Avancer sur y");
+                        traiterDeplacements(0.0, 0.0, coeffTrans * translation.Y / 2900, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur y");
                         break;
                     case "z":
-                    traiterDeplacements(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
                         Console.WriteLine("Avancer sur z");
+                        traiterDeplacements((-1) * coeffTrans * translation.Z / 2900, 0.0, 0.0, 0.0, 0.0, 0.0);
+                        Console.WriteLine("Fin Avancer sur z");
                         break;
-                    /*case "a":
-                        traiterDeplacements(0.0, 0.0, 0.0, 10.0, 0.0, 0.0);
+                    case "a":
+                        traiterDeplacements(0.0, 0.0, 0.0, coeffRot*rotation.X*10, 0.0, 0.0);
                         Console.WriteLine("Rotation sur a");
                         break;
                     case "b":
-                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 10.0, 0.0);
+                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Y*10, 0.0);
                         Console.WriteLine("Rotation sur b");
                         break;
                     case "c":
-                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, 10.0);
+                        traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, coeffRot * rotation.Z*10);
                         Console.WriteLine("Rotation sur c");
-                        break;*/
+                        break;
                     default:
-                        //Console.WriteLine("Default case");
                         traiterDeplacements(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
                         break;
                 }
@@ -102,11 +136,6 @@ namespace darkproject
             Console.WriteLine("End programm, press a key to exit.....");
             Console.ReadKey();
         }
-
-        /*public void onKeyDown(object sender, EventArgs e)
-        {
-            Console.WriteLine("a key down");
-        }*/
 
         //Fonction de trie , renvoie l'ordre dominante et applique un filtre sur les valeurs.
         static public string getPriorityMouvement(double _x, double _y, double _z, double _a, double _b, double _c)
@@ -175,49 +204,188 @@ namespace darkproject
             pos.X = _X;
             pos.Y = _Y;
             pos.Z = _Z;
-            pos.A = 0.0;
-            pos.B = 0.0;
-            pos.C = 0.0;
+            pos.A = _A;
+            pos.B = _B;
+            pos.C = _C;
 
             if ((pos.X == 0) && (pos.Y == 0) && (pos.Z == 0) && (pos.A == 0) && (pos.B == 0) && (pos.C == 0))
             {
-                Console.WriteLine("0 pos");
+                //Console.WriteLine("0 pos");
+                if (started == true)
+                {
+                    Console.WriteLine("about to stop");
 
-                a.StopRelativeMovement();
+                    theRobot.StopRelativeMovement();
+                    started = false;
+                }
 
                 //Console.WriteLine("print after stop , nigga");
 
             }
             else
             {
+                if (started == false)
+                {
+                    Console.WriteLine("about to start");
 
-                //var sensorTest = a.ReadSensor();
+                    started = true;
+                    //Console.WriteLine("test7");
+                    Console.WriteLine("before StartRelativeMovement");
+                    theRobot.StartRelativeMovement();
+                    Console.WriteLine("after StartRelativeMovement");
+                }
+
+
+                //var sensorTest = theRobot.ReadSensor();
                 //Console.WriteLine("b: " + sensorTest);
                 //Console.WriteLine("test5");
-                //a.OpenGripper();
+                //theRobot.OpenGripper();
                 //Thread.Sleep(1000);
-                //a.CloseGripper();
+                //theRobot.CloseGripper();
                 //Console.WriteLine("test6");
 
 
-                //var pos = a.GetCurrentPosition();
+                //var pos = theRobot.GetCurrentPosition();
 
                 //Console.WriteLine("pos.X: " + pos.X);
                 //Console.WriteLine("pos.X: " + pos.X);
 
                 Console.WriteLine("before setRelativeMovement");
-                a.SetRelativeMovement(pos);
+                theRobot.SetRelativeMovement(pos);
                 Console.WriteLine("after setRelativeMovement");
 
-                //Console.WriteLine("test7");
-                Console.WriteLine("before StartRelativeMovement");
-                a.StartRelativeMovement();
-                Console.WriteLine("after StartRelativeMovement");
+                
                 //Console.WriteLine("test8");
 
             }
-
-
         }
+
+        public static void KeyboardThreadLoop()
+        {
+            ConsoleKeyInfo keyinfo;
+            do
+            {
+                keyinfo = Console.ReadKey();
+                Console.WriteLine(keyinfo.Key + " was pressed");
+
+                if ((keyinfo.KeyChar == 'a') || (keyinfo.KeyChar == 'A')) { // demander un nouveau coeff translation
+                    Console.WriteLine("donne le nouveau coeff de translation stp (entre 0 et 1.0, il vaut actuellement " + coeffTrans + "):");
+                    string s = Console.ReadLine();
+                    try {
+                        double newCoeff = Double.Parse(s);
+                        coeffTrans = newCoeff;
+                        Console.WriteLine("le nouveau coeff de translation vaut: " + coeffTrans);
+
+                    }
+                    catch (FormatException e) {
+                        Console.WriteLine("FormatException occured while trying to parse your data");
+
+
+                    }
+
+                }
+                else if ((keyinfo.KeyChar == 'z') || (keyinfo.KeyChar == 'Z')) // demander un nouveau coeff rotation
+                { // demander une nouvelle vitesse
+                    Console.WriteLine("donne le nouveau coeff de rotation stp  (entre 0 et 1.0, il vaut actuellement " + coeffRot + "):");
+                    string s = Console.ReadLine();
+                    try
+                    {
+                        double newCoeff = Double.Parse(s);
+                        coeffRot = newCoeff;
+                        Console.WriteLine("le nouveau coeff de rotation vaut: " + coeffRot);
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("FormatException occured while trying to parse your data");
+                    }
+                }
+
+                else if ((keyinfo.KeyChar == 'e') || (keyinfo.KeyChar == 'E')) // enregistrer la position current du robot
+                { // demander une nouvelle vitesse
+                    Console.WriteLine("enregistre la position current du robot");
+                    NLX.Robot.Kuka.Controller.CartesianPosition currentPos = theRobot.GetCurrentPosition();
+                    Console.WriteLine("current position:");
+                    Console.WriteLine("x: " + currentPos.X);
+                    Console.WriteLine("y: " + currentPos.Y);
+                    Console.WriteLine("z: " + currentPos.Z);
+                    Console.WriteLine("a: " + currentPos.A);
+                    Console.WriteLine("b: " + currentPos.B);
+                    Console.WriteLine("c: " + currentPos.C);
+
+
+                }
+                else if ((keyinfo.KeyChar == 'r') || (keyinfo.KeyChar == 'R')) // incr coeff trans
+                { // demander une nouvelle vitesse
+
+                    coeffTrans += 0.1;
+
+                    if(coeffTrans > 1.0)
+                    {
+                        coeffTrans = 1.0;
+                    }
+
+                    Console.WriteLine("coeffTrans: " + coeffTrans);
+
+                }
+                else if ((keyinfo.KeyChar == 't') || (keyinfo.KeyChar == 'T')) // desincr coeff trans
+                { // demander une nouvelle vitesse
+
+                    coeffTrans -= 0.1;
+
+                    if (coeffTrans < 0.0)
+                    {
+                        coeffTrans = 0.0;
+                    }
+
+                    Console.WriteLine("coeffTrans: " + coeffTrans);
+
+                }
+                else if ((keyinfo.KeyChar == 'y') || (keyinfo.KeyChar == 'Y')) // incr coeff rot
+                { // demander une nouvelle vitesse
+
+
+                    coeffRot += 0.1;
+
+                    if (coeffRot > 1.0)
+                    {
+                        coeffRot = 1.0;
+                    }
+
+                    Console.WriteLine("coeffRot: " + coeffRot);
+
+                }
+                else if ((keyinfo.KeyChar == 'u') || (keyinfo.KeyChar == 'U')) // desincr coeff rot
+                { // demander une nouvelle vitesse
+
+                    coeffRot -= 0.1;
+
+                    if (coeffRot < 0.0)
+                    {
+                        coeffRot = 0.0;
+                    }
+
+                    Console.WriteLine("coeffRot: " + coeffRot);
+
+                }
+                else if ((keyinfo.KeyChar == 'i') || (keyinfo.KeyChar == 'I')) // open grip
+                { // demander une nouvelle vitesse
+
+                    theRobot.OpenGripper();
+
+                    Console.WriteLine("open grip");
+
+                }
+                else if ((keyinfo.KeyChar == 'o') || (keyinfo.KeyChar == 'O')) // close grip
+                { // demander une nouvelle vitesse
+
+                    theRobot.CloseGripper();
+
+                    Console.WriteLine("close grip");
+
+                }
+            }
+            while (Thread.CurrentThread.IsAlive);
+        }
+
     }   
 }
