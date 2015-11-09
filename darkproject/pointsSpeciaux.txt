@@ -1,4 +1,4 @@
-point 1,1
+﻿point 1,1
 934,31
 -266,03
 97,90
@@ -21,3 +21,9 @@ point juste à droite du 1,1
 -101,29
 0,46
 -89,63
+
+decalage x.droite = -54,21
+decalage y.droite = +45,42
+
+decalage x.bas = +32,53
+decalage y.bas = +38,04
