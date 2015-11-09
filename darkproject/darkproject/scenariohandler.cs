@@ -13,6 +13,11 @@ namespace darkproject
         private StreamWriter fs;
         System.Collections.Generic.List<NLX.Robot.Kuka.Controller.CartesianPosition> listPos;
 
+        NLX.Robot.Kuka.Controller.CartesianPosition point0;
+        NLX.Robot.Kuka.Controller.CartesianPosition point1;
+        NLX.Robot.Kuka.Controller.CartesianPosition point2;
+        NLX.Robot.Kuka.Controller.CartesianPosition point3;
+
 
         public void readAndInterpretFile(string path, NLX.Robot.Kuka.Controller.RobotController robot)
         {
@@ -127,6 +132,70 @@ namespace darkproject
 
         }
 
+        public void parseFile(string path, NLX.Robot.Kuka.Controller.RobotController robot)
+        {
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    using (StreamReader sr = new StreamReader(path))
+                    {
+
+                        double d;
+                        new List<NLX.Robot.Kuka.Controller.CartesianPosition>();
+
+                        while (sr.Peek() >= 0)
+                        {
+                            string str = sr.ReadLine();
+
+                            if (Double.TryParse(str, out d))
+                            {
+                                // 
+
+                                NLX.Robot.Kuka.Controller.CartesianPosition cpos = new NLX.Robot.Kuka.Controller.CartesianPosition();
+
+                                cpos.X = d;
+
+                                str = sr.ReadLine();
+                                Double.TryParse(str, out d);
+                                cpos.Y = d;
+
+                                str = sr.ReadLine();
+                                Double.TryParse(str, out d);
+                                cpos.Z = d;
+
+                                str = sr.ReadLine();
+                                Double.TryParse(str, out d);
+                                cpos.A = d;
+
+                                str = sr.ReadLine();
+                                Double.TryParse(str, out d);
+                                cpos.B = d;
+
+                                str = sr.ReadLine();
+                                Double.TryParse(str, out d);
+                                cpos.C = d;
+
+                                str = sr.ReadLine();
+
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("it doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+
+        }
+
         public void addInstruction(string instructions)
         {
             //using (StreamWriter outfile = new StreamWriter())
@@ -159,7 +228,6 @@ namespace darkproject
                 listPos.Clear();
 
             }
-
         }
     }
 }
