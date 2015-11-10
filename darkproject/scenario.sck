@@ -19,8 +19,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -125,8 +125,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -168,7 +168,7 @@ close
 
 # Point de paletisation position haute deuxieme pièce
 880,10
--271,45
+-311,45
 422,40
 -101,29
 0,46
@@ -176,18 +176,18 @@ close
 
 # Point de depose pièce sur palette
 880,10
--271,45
+-311,45
 97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute deuxième pièce
 880,10
--271,45
+-311,45
 422,40
 -101,29
 0,46
@@ -231,8 +231,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -274,7 +274,7 @@ close
 
 # Point de paletisation position haute troisième pièce
 825,89
--316,87
+-356,87
 422,40
 -101,29
 0,46
@@ -282,18 +282,18 @@ close
 
 # Point de depose pièce sur palette
 825,89
--316,87
-422,40
+-356,87
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute troisième pièce
 825,89
--316,87
+-356,87
 422,40
 -101,29
 0,46
@@ -337,8 +337,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -380,7 +380,7 @@ close
 
 # Point de paletisation position haute 4eme pièce
 771,68
--362,29
+-402,29
 422,40
 -101,29
 0,46
@@ -388,18 +388,18 @@ close
 
 # Point de depose pièce sur palette
 771,68
--362,29
-422,40
+-402,29
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 4eme pièce
 771,68
--362,29
+-402,29
 422,40
 -101,29
 0,46
@@ -443,8 +443,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -485,27 +485,27 @@ close
 -89,63
 
 # Point de paletisation position haute 5eme pièce
-880,10
--311,45
+901,78
+-227,99
 422,40
 -101,29
 0,46
 -89,63
 
 # Point de depose pièce sur palette
-880,10
--311,45
-422,40
+901,78
+-227,99
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 5eme pièce
-880,10
--311,45
+901,78
+-227,99
 422,40
 -101,29
 0,46
@@ -549,8 +549,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -601,13 +601,13 @@ close
 # Point de depose pièce sur palette
 847,57
 -273,41
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 6eme pièce
 847,57
@@ -655,8 +655,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -707,13 +707,13 @@ close
 # Point de depose pièce sur palette
 793,36
 -318,43
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 7eme pièce
 793,36
@@ -761,8 +761,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -804,7 +804,7 @@ close
 
 # Point de paletisation position haute 8eme pièce
 739,15
--363,85
+-364,65
 422,40
 -101,29
 0,46
@@ -812,18 +812,18 @@ close
 
 # Point de depose pièce sur palette
 739,15
--363,85
-422,40
+-364,65
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 8eme pièce
 739,15
--363,85
+-364,65
 422,40
 -101,29
 0,46
@@ -867,8 +867,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -919,13 +919,13 @@ close
 # Point de depose pièce sur palette
 869,25
 -189,95
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 9eme pièce
 869,25
@@ -973,8 +973,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -1025,13 +1025,13 @@ close
 # Point de depose pièce sur palette
 815,04
 -235,37
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 10eme pièce
 815,04
@@ -1079,8 +1079,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -1131,13 +1131,13 @@ close
 # Point de depose pièce sur palette
 760,83
 -280,79
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 11eme pièce
 760,83
@@ -1185,8 +1185,8 @@ open
 
 # Position Prise Pièce
 506,57
-227,20
-216,30
+229,20
+218,30
 -73,36
 85,67
 -169,14
@@ -1237,17 +1237,441 @@ close
 # Point de depose pièce sur palette
 706,62
 -326,21
-422,40
+97,90
 -101,29
 0,46
 -89,63
 
 # Ouverture pince
-open 
+open
 
 # Point de paletisation position haute 12eme pièce
 706,62
 -326,21
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+#################################################
+# 13eme Pièce
+#################################################
+
+# Position Approche Prise pièce
+506,58
+97,65
+216,30
+-73,36
+85,67
+-169,14
+
+# Position Prise Pièce
+506,57
+229,20
+218,30
+-73,36
+85,67
+-169,14
+
+# Prise de la pièce
+close
+
+# Dégagement de la pièce
+506,40
+227,18
+357,27
+-73,36
+85,67
+-169,14
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de paletisation position haute 13eme pièce
+836,72
+-151,91
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de depose pièce sur palette
+836,72
+-151,91
+97,90
+-101,29
+0,46
+-89,63
+
+# Ouverture pince
+open
+
+# Point de paletisation position haute 13eme pièce
+836,72
+-151,91
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+#################################################
+# 14eme Pièce
+#################################################
+
+# Position Approche Prise pièce
+506,58
+97,65
+216,30
+-73,36
+85,67
+-169,14
+
+# Position Prise Pièce
+506,57
+229,20
+218,30
+-73,36
+85,67
+-169,14
+
+# Prise de la pièce
+close
+
+# Dégagement de la pièce
+506,40
+227,18
+357,27
+-73,36
+85,67
+-169,14
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de paletisation position haute 14eme pièce
+782,51
+-197,33
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de depose pièce sur palette
+782,51
+-197,33
+97,90
+-101,29
+0,46
+-89,63
+
+# Ouverture pince
+open
+
+# Point de paletisation position haute 14eme pièce
+782,51
+-197,33
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+#################################################
+# 15eme Pièce
+#################################################
+
+# Position Approche Prise pièce
+506,58
+97,65
+216,30
+-73,36
+85,67
+-169,14
+
+# Position Prise Pièce
+506,57
+229,20
+218,30
+-73,36
+85,67
+-169,14
+
+# Prise de la pièce
+close
+
+# Dégagement de la pièce
+506,40
+227,18
+357,27
+-73,36
+85,67
+-169,14
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de paletisation position haute 15eme pièce
+728,30
+-242,75
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de depose pièce sur palette
+728,30
+-242,75
+97,90
+-101,29
+0,46
+-89,63
+
+# Ouverture pince
+open
+
+# Point de paletisation position haute 15eme pièce
+728,30
+-242,75
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+#################################################
+# 16eme Pièce
+#################################################
+
+# Position Approche Prise pièce
+506,58
+97,65
+216,30
+-73,36
+85,67
+-169,14
+
+# Position Prise Pièce
+506,57
+229,20
+218,30
+-73,36
+85,67
+-169,14
+
+# Prise de la pièce
+close
+
+# Dégagement de la pièce
+506,40
+227,18
+357,27
+-73,36
+85,67
+-169,14
+
+# Point de passage pour palettisation
+668,94
+9,34
+557,17
+128,38
+0,13
+89,92
+
+# Point de passage limite axe 4
+700,69
+-131,14
+321,83
+-98,60
+0,16
+-169,32
+
+# Point de passage limite axe 6
+839,23
+-160,83
+493,78
+-101,29
+0,46
+-89,63
+
+# Point de paletisation position haute 16eme pièce
+674,09
+-288,17
+422,40
+-101,29
+0,46
+-89,63
+
+# Point de depose pièce sur palette
+674,09
+-288,17
+97,90
+-101,29
+0,46
+-89,63
+
+# Ouverture pince
+open
+
+# Point de paletisation position haute 16eme pièce
+674,09
+-288,17
 422,40
 -101,29
 0,46

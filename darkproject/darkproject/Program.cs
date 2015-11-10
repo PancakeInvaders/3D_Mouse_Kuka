@@ -34,6 +34,8 @@ namespace darkproject
         static double coeffTrans;
         static double coeffRot;
 
+        static int pointAEnregistrer = 0;
+
         static void Main(string[] args)
         {
             started = false;
@@ -285,6 +287,46 @@ namespace darkproject
 
 
                 }
+                else if ((keyinfo.KeyChar == 'd') || (keyinfo.KeyChar == 'D')) // enregistrer la position current du robot en tant que p0, p1, p2, et p3
+                { // demander une nouvelle vitesse
+
+                    string point="p";
+
+                    if (pointAEnregistrer == 0) {
+                        point = "p0";
+                    }
+                    else if (pointAEnregistrer == 1)
+                    {
+                        point = "p1";
+                    }
+                    else if (pointAEnregistrer == 2)
+                    {
+                        point = "p2";
+                    }
+                    else if (pointAEnregistrer == 3)
+                    {
+                        point = "p3";
+                    }
+
+                    Console.WriteLine("enregistre la position current du robot");
+                    NLX.Robot.Kuka.Controller.CartesianPosition currentPos = theRobot.GetCurrentPosition();
+
+                    if (modeCapture == true)
+                    {
+                        //a finir , convertir double en string mais attention ! virgule ou point?!
+                        sh.addInstruction(point);
+                        sh.addInstruction(currentPos.X.ToString());
+                        sh.addInstruction(currentPos.Y.ToString());
+                        sh.addInstruction(currentPos.Z.ToString());
+                        sh.addInstruction(currentPos.A.ToString());
+                        sh.addInstruction(currentPos.B.ToString());
+                        sh.addInstruction(currentPos.C.ToString());
+                        sh.addInstruction("");
+                    }
+
+
+
+                }
                 else if ((keyinfo.KeyChar == 'r') || (keyinfo.KeyChar == 'R')) // incr coeff trans
                 { // demander une nouvelle vitesse
 
@@ -377,7 +419,7 @@ namespace darkproject
                         Console.WriteLine("in Q default");
 
                         ScenarioHandler sh = new ScenarioHandler();
-                        sh.readAndInterpretFile(scenarioDefaut, theRobot);
+                        sh.readAndInterpretFile2(scenarioDefaut, theRobot);
                     }
                     else
                     {
@@ -386,7 +428,7 @@ namespace darkproject
 
 
                         ScenarioHandler sh = new ScenarioHandler();
-                        sh.readAndInterpretFile(scenarioGenere, theRobot);
+                        sh.readAndInterpretFile2(scenarioGenere, theRobot);
                     }
 
                 }
