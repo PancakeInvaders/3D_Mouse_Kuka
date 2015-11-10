@@ -44,7 +44,7 @@ namespace darkproject
 
             Console.WriteLine("Start of programm....");
             coeffTrans = 1.0;
-            coeffRot = 1.0;
+            coeffRot = 0.4;
 
             Thread myThreadKeyboard;
             myThreadKeyboard = new Thread(new ThreadStart(KeyboardThreadLoop));
@@ -294,18 +294,27 @@ namespace darkproject
 
                     if (pointAEnregistrer == 0) {
                         point = "p0";
+                        pointAEnregistrer += 1;
                     }
                     else if (pointAEnregistrer == 1)
                     {
                         point = "p1";
+                        pointAEnregistrer += 1;
                     }
                     else if (pointAEnregistrer == 2)
                     {
-                        point = "p2";
+                        point = "p0";
+                        pointAEnregistrer += 1;
                     }
                     else if (pointAEnregistrer == 3)
                     {
+                        point = "p2";
+                        pointAEnregistrer += 1;
+                    }
+                    else if (pointAEnregistrer == 4)
+                    {
                         point = "p3";
+                        pointAEnregistrer += 1;
                     }
 
                     Console.WriteLine("enregistre la position current du robot");

@@ -287,9 +287,11 @@ namespace darkproject
             try
             {
 
-                for (int ligne = 0; ligne <= nbLignesPalette; ligne++)
+                //for (int ligne = 0; ligne <= nbLignesPalette; ligne++)
+                for (int colonne = 0; colonne <= nbColonnesPalette; colonne++)
                 {
-                    for (int colonne = 0; colonne <= nbColonnesPalette; colonne++)
+                    for (int ligne = 0; ligne <= nbLignesPalette; ligne++)
+                    //for (int colonne = 0; colonne <= nbColonnesPalette; colonne++)
                     {
                         Console.WriteLine("ligne: " + ligne + ",colonne: " + colonne);
 
@@ -384,8 +386,11 @@ namespace darkproject
                                             NLX.Robot.Kuka.Controller.CartesianPosition cpos = new NLX.Robot.Kuka.Controller.CartesianPosition();
 
                                             str = sr.ReadLine();
+                                            Console.WriteLine("str: " + str);
                                             Double.TryParse(str, out d);
                                             //cpos.X = d + ligne*xdecy + colonne*xdecy;
+                                            Console.WriteLine("ligne: " + ligne);
+                                            Console.WriteLine("colonne: " + colonne);
                                             cpos.X = d + (-1)*ligne*xdecx + (-1)*colonne*xdecy;
 
 
